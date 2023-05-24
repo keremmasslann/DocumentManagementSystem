@@ -2,4 +2,5 @@ public class WordDocument extends Document{ //Concrete Product of Abstract Facto
     public WordDocument(String name) {
         super(name, "Word");
     }
+
 }

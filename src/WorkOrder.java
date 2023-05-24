@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class WorkOrder implements DocumentComponent { //Composite class of Composite Pattern, +++
+public class WorkOrder implements DocumentComponent { //Composite class of Composite Pattern, Receiver class of Command Pattern(degil muhtemelen)
     private String name;
     private List<DocumentComponent> documentComponents;
 

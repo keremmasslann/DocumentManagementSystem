@@ -1,4 +1,6 @@
-public class Document implements DocumentComponent{ //Leaf/Child class of Composite Pattern, Abstract Product of Factory Pattern
+public class Document  extends DocumentSubject implements DocumentComponent{
+    //Leaf/Child class of Composite Pattern, Abstract Product of Abstract Factory Pattern, Receiver class of Command Pattern
+    //Concrete Subject class for Observer Pattern
     String name;
     String format;
 
@@ -40,9 +42,9 @@ public class Document implements DocumentComponent{ //Leaf/Child class of Compos
     }
 
     @Override
-    public void sign() {
-     //   this.isSigned = true;
-        System.out.println("cant sign itself ???????");
+    public void sign() { //Receiver class because of this
+        this.isSigned = true;
+        System.out.println("Document signed");
     }
 
     @Override
