@@ -7,7 +7,6 @@ public class SendForSigningCommand implements WorkflowCommand{ //Concrete Comman
 
     @Override
     public void execute() {
-        // Send document for signing logic
         System.out.println("Sending document " + document.name + "for signing");
     }
 }

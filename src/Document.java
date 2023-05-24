@@ -1,21 +1,10 @@
 public class Document  extends DocumentSubject implements DocumentComponent{
-    //Leaf/Child class of Composite Pattern, Abstract Product of Abstract Factory Pattern, Receiver class of Command Pattern
-    //Concrete Subject class for Observer Pattern
+    //Leaf/Child class of Composite Pattern, Abstract Product of Abstract Factory Pattern
+    // Concrete Subject class for Observer Pattern
     String name;
     String format;
-
-    /*Format format;
-
-    public enum Format{
-        WORD,
-        PDF
-    }*/
-
     private boolean isSigned;
-  /*  public Document(String name,Format format){
-        this.name=name;
-        this.format=format;
-    }*/
+
   public Document(String name,String format) {
       this.name = name;
       this.format = format;
@@ -42,7 +31,7 @@ public class Document  extends DocumentSubject implements DocumentComponent{
     }
 
     @Override
-    public void sign() { //Receiver class because of this
+    public void sign() {
         this.isSigned = true;
         System.out.println("Document signed");
         super.Notify();

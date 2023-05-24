@@ -1,41 +1,55 @@
-public class Main { //Client class of Composite pattern, +++
+public class Main {
     public static void main(String[] args) {
-        WorkOrder workOrder = new WorkOrder("WO-001");
 
-        DocumentFactory pdfFactory = new PdfDocumentFactory();
-        DocumentFactory wordFactory = new WordDocumentFactory();
-        // Create a document
-        Document document1 = pdfFactory.createDocument("Document 1");
-        Document document2 = wordFactory.createDocument("Document 2");
+        WorkOrder workOrder = new WorkOrder("WorkOrder1");
 
-        // Add documents to the work order
-        workOrder.Add(document1);
-        workOrder.Add(document2);
+        DocumentFactory wordFactory = DocumentFactory.getInstance("Word");
 
-        // Create sub-work orders
-        WorkOrder subWorkOrder1 = new WorkOrder("WO-001-A");
-        WorkOrder subWorkOrder2 = new WorkOrder("WO-001-B");
+        DocumentFactory pdfFactory = DocumentFactory.getInstance("Pdf");
 
-        // Add sub-work orders to the main work order
+        Document doc1 = wordFactory.createDocument("Document1");
+        Document doc2 = wordFactory.createDocument("Document2");
+
+        Document subWorkOrderDocument1 = pdfFactory.createDocument("Sub WorkOrder Document 1");
+        Document subWorkOrderDocument2 = pdfFactory.createDocument("Sub WorkOrder Document 2");
+
+        workOrder.Add(doc1);
+        workOrder.Add(doc2);
+
+        WorkOrder subWorkOrder1 = new WorkOrder("WorkOrder1A");
+        WorkOrder subWorkOrder2 = new WorkOrder("WorkOrder1B");
+
         workOrder.Add(subWorkOrder1);
         workOrder.Add(subWorkOrder2);
 
-        // Create sub-work order documents
-        Document subWorkOrderDocument1 = wordFactory.createDocument("Sub-WorkOrder Document 1");
-        Document subWorkOrderDocument2 = pdfFactory.createDocument("Sub-WorkOrder Document 2");
-
-        // Add documents to sub-work orders
         subWorkOrder1.Add(subWorkOrderDocument1);
         subWorkOrder2.Add(subWorkOrderDocument2);
 
-        // Sign the main work order and its documents
         workOrder.sign();
-        System.out.println("Main Work Order signed: " + workOrder.isSigned());
-        System.out.println("Document 1 signed: " + document1.isSigned());
-        System.out.println("Document 2 signed: " + document2.isSigned());
-        System.out.println("Sub-WorkOrder Document 1 signed: " + subWorkOrderDocument1.isSigned());
-        System.out.println("Sub-WorkOrder Document 2 signed: " + subWorkOrderDocument2.isSigned());
+
+        DocumentObserver ownerObserver = new NotificationObserver();
+
+        workOrder.Attach((NotificationObserver) ownerObserver);
+
+        workOrder.Display(0);
+
+        workOrder.Detach((NotificationObserver) ownerObserver);
+
+        workOrder.sign();
+
+        workOrder.Display(0);
+
+        WorkflowEngine workflowEngine = new WorkflowEngine();
+
+        WorkflowCommand verifyFieldsCommand = new VerifyFieldsCommand(doc1);
+        WorkflowCommand sendForSigningCommand = new SendForSigningCommand(doc2);
+
+        workflowEngine.AddCommand(verifyFieldsCommand);
+        workflowEngine.AddCommand(sendForSigningCommand);
+
+        workflowEngine.ProcessWorkflow();
     }
+
 }
 
 

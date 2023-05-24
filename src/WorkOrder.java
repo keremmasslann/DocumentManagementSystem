@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class WorkOrder implements DocumentComponent { //Composite class of Composite Pattern, Receiver class of Command Pattern(degil muhtemelen)
+public class WorkOrder extends DocumentSubject implements DocumentComponent { //Composite class of Composite Pattern, Receiver class of Command Pattern(degil muhtemelen)
     private String name;
     private List<DocumentComponent> documentComponents;
 
@@ -26,7 +26,6 @@ public class WorkOrder implements DocumentComponent { //Composite class of Compo
         for (int i = 1; i <= indent; i++) System.out.print("-");
         System.out.println("+ " + getName());
 
-        // Display each child element on this node
         for (int i = 0; i < documentComponents.size(); i++) {
             documentComponents.get(i).Display(indent + 2);
         }

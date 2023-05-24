@@ -1,4 +1,4 @@
-public interface DocumentComponent { //Component class of Composite Pattern, +++
+public interface DocumentComponent { //Component class of Composite Pattern
 
     void Add(DocumentComponent d);
     void Remove(DocumentComponent d);
@@ -7,5 +7,5 @@ public interface DocumentComponent { //Component class of Composite Pattern, +++
 
     public abstract void sign();
 
-    public abstract boolean isSigned(); //???
+    public abstract boolean isSigned();
 }
