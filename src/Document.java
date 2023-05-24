@@ -1,3 +1,8 @@
+//KEREM ASLAN
+//SERKAN KOÇ
+//OZAN TANDOĞAN
+//ARDA GÖKÇE
+//Document Management System
 public class Document  extends DocumentSubject implements DocumentComponent{
     //Leaf/Child class of Composite Pattern, Abstract Product of Abstract Factory Pattern
     // Concrete Subject class for Observer Pattern
