@@ -45,6 +45,7 @@ public class Document  extends DocumentSubject implements DocumentComponent{
     public void sign() { //Receiver class because of this
         this.isSigned = true;
         System.out.println("Document signed");
+        super.Notify();
     }
 
     @Override

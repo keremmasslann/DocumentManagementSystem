@@ -4,10 +4,7 @@ import java.util.List;
 abstract class DocumentSubject { //Subject Class of Observer Pattern
 
      ArrayList<NotificationObserver> observers = new ArrayList<NotificationObserver>();
- /*  public DocumentSubject() {
-        _symbol = symbol;
-        _price = price;
-    } */
+
     //Register the Observers
     public void Attach (NotificationObserver observer) {
         observers.add(observer);
@@ -26,7 +23,8 @@ abstract class DocumentSubject { //Subject Class of Observer Pattern
         // set argument to something that helps
         // tell the Observers what happened
         for (int i = 0; i < observers.size(); i++) {
-            observers.get(i).update((Document) this);
+            observers.get(i).update((Document) this); //burası hatalı muhtemelen
+            System.out.println("This document is signed(notification)");
         }
     }
 

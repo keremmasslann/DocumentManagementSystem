@@ -1,43 +1,45 @@
 public class Main { //Client class of Composite pattern, +++
     public static void main(String[] args) {
-        // Create a work order
-        WorkOrder purchaseWorkOrder = new WorkOrder("Purchase Work Order");
+        WorkOrder workOrder = new WorkOrder("WO-001");
+
+        DocumentFactory pdfFactory = new PdfDocumentFactory();
+        DocumentFactory wordFactory = new WordDocumentFactory();
+        // Create a document
+        Document document1 = pdfFactory.createDocument("Document 1");
+        Document document2 = wordFactory.createDocument("Document 2");
+
+        // Add documents to the work order
+        workOrder.Add(document1);
+        workOrder.Add(document2);
 
         // Create sub-work orders
-        WorkOrder shipment = new WorkOrder("Shipment");
-        WorkOrder payment = new WorkOrder("Payment");
+        WorkOrder subWorkOrder1 = new WorkOrder("WO-001-A");
+        WorkOrder subWorkOrder2 = new WorkOrder("WO-001-B");
 
-        // Create document factories
-        DocumentFactory wordDocumentFactory = new WordDocumentFactory();
-        DocumentFactory pdfDocumentFactory = new PdfDocumentFactory();
+        // Add sub-work orders to the main work order
+        workOrder.Add(subWorkOrder1);
+        workOrder.Add(subWorkOrder2);
 
-        // Create documents using factories
-        Document billOfLading = pdfDocumentFactory.createDocument("Bill of Lading");
-        Document packagingSlip = pdfDocumentFactory.createDocument("Packaging Slip");
-        Document invoice = wordDocumentFactory.createDocument("Invoice");
+        // Create sub-work order documents
+        Document subWorkOrderDocument1 = wordFactory.createDocument("Sub-WorkOrder Document 1");
+        Document subWorkOrderDocument2 = pdfFactory.createDocument("Sub-WorkOrder Document 2");
 
+        // Add documents to sub-work orders
+        subWorkOrder1.Add(subWorkOrderDocument1);
+        subWorkOrder2.Add(subWorkOrderDocument2);
 
-        shipment.Add(billOfLading);
-        shipment.Add(packagingSlip);
-        payment.Add(invoice);
-
-        purchaseWorkOrder.Add(shipment);
-        purchaseWorkOrder.Add(payment);
-
-        // Process the work order workflow
-        purchaseWorkOrder.sign();
-
-        // Check document status
-        System.out.println("Document '" + billOfLading.name + "' signed: " + billOfLading.isSigned());
-        System.out.println("Document '" + packagingSlip.name + "' signed: " + packagingSlip.isSigned());
-        System.out.println("Document '" + invoice.name + "' signed: " + invoice.isSigned());
-
-        // Check work order status
-        System.out.println("Work Order '" + purchaseWorkOrder.getName() + "' workflow complete: " + purchaseWorkOrder.isSigned());
-
-
-
-
+        // Sign the main work order and its documents
+        workOrder.sign();
+        System.out.println("Main Work Order signed: " + workOrder.isSigned());
+        System.out.println("Document 1 signed: " + document1.isSigned());
+        System.out.println("Document 2 signed: " + document2.isSigned());
+        System.out.println("Sub-WorkOrder Document 1 signed: " + subWorkOrderDocument1.isSigned());
+        System.out.println("Sub-WorkOrder Document 2 signed: " + subWorkOrderDocument2.isSigned());
     }
-
 }
+
+
+
+
+
+
